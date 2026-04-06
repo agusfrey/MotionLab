@@ -14,7 +14,7 @@ def parsear_linea(linea):
     tiempo          = float(campos[1])
     x               = float(campos[2])
     y               = float(campos[3])
-    hit             = campos[4].strip().lower() == "true"
+    hit             = campos[4].strip() == "true"
     condicion       = campos[5].strip()
     return [id_participante, tiempo, x, y, hit, condicion]
 
@@ -43,7 +43,7 @@ def cargar_datos(ruta):
     """
     datos = []
     archivo = open(ruta, "r")
-    archivo.readline()  # omite el encabezado
+    archivo.readline()  
     for linea in archivo:
         valores = parsear_linea(linea)
         id_participante = valores[0]
@@ -53,7 +53,7 @@ def cargar_datos(ruta):
         hit             = valores[4]
         condicion       = valores[5]
 
-        # Busca si el participante ya existe en la lista
+      
         registro_existente = None
         for registro in datos:
             if registro["id_participante"] == id_participante:
@@ -61,14 +61,14 @@ def cargar_datos(ruta):
                 break
 
         if registro_existente is not None:
-            # Si ya existe, agrega los valores a sus listas
+            # si ye existe, agrega los valores a sus listas
             registro_existente["tiempo"].append(tiempo)
             registro_existente["x"].append(x)
             registro_existente["y"].append(y)
             registro_existente["hit"].append(hit)
             registro_existente["condicion"].append(condicion)
         else:
-            # Si no existe, crea un diccionario nuevo
+            # si no existe, crea un diccionario nuevo
             nuevo_registro = {
                 "id_participante": id_participante,
                 "tiempo":    [tiempo],
