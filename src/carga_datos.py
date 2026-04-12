@@ -81,3 +81,46 @@ def cargar_datos(ruta):
 
     archivo.close()
     return datos
+
+
+from src.validacion_datos import validar_linea
+
+def cargar_datos(ruta):
+    datos = {}
+
+    try:
+        with open(ruta, "r") as archivo:
+            lineas = archivo.readlines()
+
+        for linea in lineas[1:]:
+            try:
+                id_p, tiempo, x, y, hit, condicion = parsear_linea(linea)
+
+                validar_linea(id_p, tiempo, x, y, hit, condicion)
+
+                if id_p not in datos:
+                    datos[id_p] = {
+                        "id_participante": id_p,
+                        "tiempo": [],
+                        "x": [],
+                        "y": [],
+                        "hit": [],
+                        "condicion": []
+                    }
+
+                datos[id_p]["tiempo"].append(tiempo)
+                datos[id_p]["x"].append(x)
+                datos[id_p]["y"].append(y)
+                datos[id_p]["hit"].append(hit)
+                datos[id_p]["condicion"].append(condicion)
+
+            except Exception as e:
+                print("Error en línea:", linea)
+                print("Detalle:", e)
+                return None  # corta ejecución
+
+        return list(datos.values())
+
+    except FileNotFoundError:
+        print("Archivo no encontrado")
+        return None
