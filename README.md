@@ -9,3 +9,11 @@ El sistema tiene 4 archivos con 7 funciones en total:
 - `validacion_datos` = valida que los datos estén bien
 - `procesamiento_datos` = filtra los datos por participante
 - `metricas` = calcula hits totales, tiempo del primer hit y hits por bloques
+
+Errores y Validaciones:
+
+- Se valida que el ID sea entero
+- Se valida que el tiempo sea positivo
+- Se valida que (x) e (y) sean números
+- Se utiliza try-except para que salten errores
+- En caso de error, el programa se detiene mostrando el problema
