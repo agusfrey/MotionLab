@@ -22,3 +22,33 @@ def validar_registro(registro):
         return True
     except:
         return False
+
+
+def validar_linea(id_p, tiempo, x, y, hit, condicion):
+    
+    try:
+        int(id_p)
+    except:
+        raise ValueError("ID inválido")
+
+    try:
+        float(tiempo)
+    except:
+        raise ValueError("Tiempo inválido")
+
+    try:
+        float(x)
+        float(y)
+    except:
+        raise ValueError("Coordenadas inválidas")
+
+    if hit != True and hit != False:
+        raise ValueError("Hit inválido")
+
+    if condicion == "":
+        raise ValueError("Condición vacía")
+
+    if tiempo < 0:
+        raise ValueError("Tiempo negativo")
+
+    return True
