@@ -4,15 +4,25 @@ from src.metricas import calcular_hits_totales, calcular_tiempo_primer_hit
 
 ruta = "datos/motionlab_mock_data.csv"
 # 1. cargar datos desde el archivo
-datos = cargar_datos("datos/datos.csv")
+try:
+    datos = cargar_datos("datos/datos.csv")
+    if len(datos) == 0:
+        raise ValueError('No se pueden cargar los datos del archivo')
+except ValueError as e:
+    print("Error":e)
 
 
 # 2. filtrar datos válidos
-datos_validos = []
+try: 
+    datos_validos = []
 
-for registro in datos:
+    for registro in datos:
     if validar_registro(registro):
         datos_validos.append(registro)
+    if len(datos_validos) == 0:
+         raise ValueError("no pasó la validación")
+except ValueError as e:
+    print("Error:" e")
 
 # 3. calcular métricas y mostrar resultados
 for registro in datos_validos:
