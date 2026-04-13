@@ -2,7 +2,7 @@ from src.carga_datos import cargar_datos
 from src.validacion_datos import validar_registro
 from src.metricas import calcular_hits_totales, calcular_tiempo_primer_hit
 
-ruta = "datos/motionlab_mock_data.csv"
+
 # 1. cargar datos desde el archivo
 try:
     datos = cargar_datos("datos/datos.csv")
