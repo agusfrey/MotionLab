@@ -1,0 +1,83 @@
+def parsear_linea(linea):
+    """
+    Parsea una línea del archivo CSV y devuelve sus valores convertidos al tipo correspondiente.
+
+    Parámetros:
+        linea (str): línea del archivo CSV con los campos separados por comas.
+
+    Retorna:
+        list: lista con los valores [id_participante, tiempo, x, y, hit, condicion]
+              donde id_participante es int, tiempo/x/y son float, hit es bool y condicion es str.
+    """
+    campos = linea.strip().split(",")
+    id_participante = int(campos[0])
+    tiempo          = float(campos[1])
+    x               = float(campos[2])
+    y               = float(campos[3])
+    hit             = campos[4].strip().lower() == "true"
+    condicion       = campos[5].strip()
+    return [id_participante, tiempo, x, y, hit, condicion]
+
+
+def cargar_datos(ruta):
+    """
+    Lee un archivo CSV y organiza los datos por participante.
+
+    Abre el archivo indicado, omite el encabezado y recorre cada línea
+    aplicando parsear_linea. Agrupa los registros por id_participante,
+    acumulando los valores en listas dentro de un diccionario por participante.
+
+    Parámetros:
+        ruta (str): ruta al archivo CSV con los datos de la tarea motora.
+
+    Retorna:
+        list: lista de diccionarios, uno por participante, con la estructura:
+              {
+                  "id_participante": int,
+                  "tiempo":    [float, ...],
+                  "x":         [float, ...],
+                  "y":         [float, ...],
+                  "hit":       [bool, ...],
+                  "condicion": [str, ...]
+              }
+    """
+    datos = []
+    archivo = open(ruta, "r")
+    archivo.readline()  # omite el encabezado
+    for linea in archivo:
+        valores = parsear_linea(linea)
+        id_participante = valores[0]
+        tiempo          = valores[1]
+        x               = valores[2]
+        y               = valores[3]
+        hit             = valores[4]
+        condicion       = valores[5]
+
+        # Busca si el participante ya existe en la lista
+        registro_existente = None
+        for registro in datos:
+            if registro["id_participante"] == id_participante:
+                registro_existente = registro
+                break
+
+        if registro_existente is not None:
+            # Si ya existe, agrega los valores a sus listas
+            registro_existente["tiempo"].append(tiempo)
+            registro_existente["x"].append(x)
+            registro_existente["y"].append(y)
+            registro_existente["hit"].append(hit)
+            registro_existente["condicion"].append(condicion)
+        else:
+            # Si no existe, crea un diccionario nuevo
+            nuevo_registro = {
+                "id_participante": id_participante,
+                "tiempo":    [tiempo],
+                "x":         [x],
+                "y":         [y],
+                "hit":       [hit],
+                "condicion": [condicion]
+            }
+            datos.append(nuevo_registro)
+
+    archivo.close()
+    return datos
