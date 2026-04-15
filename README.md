@@ -18,6 +18,7 @@ El sistema tiene 4 archivos con 7 funciones en total:
 - Se valido que (x) e (y) sean números
 - Se utilizo try-except para que salten errores
 - En caso de error, el programa se detiene mostrando el problema
+- En el main, si el ID ingresado no existe, se muestra un mensaje de error
 
 #USO IA
 Se uso Chatgpt para identificar mejor los errores y no equivocarse acoplando todo.
