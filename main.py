@@ -1,5 +1,6 @@
 from src.carga_datos import cargar_datos
 from src.validacion_datos import validar_registro
+from src.procesamiento_datos import filtrar_por_participante
 from src.metricas import calcular_hits_totales, calcular_tiempo_primer_hit
 
 
@@ -23,6 +24,15 @@ try:
          raise ValueError("no pasó la validación")
 except ValueError as e:
     print("Error:" e")
+
+
+try:
+    id_buscado   = int(input("Ingrese el ID del participante: "))
+    participante = filtrar_por_participante(datos_validos, id_buscado)
+    if participante is None:
+        raise ValueError('No se encontró el participante con ID')
+except ValueError as e:
+    print("Error:" e)
 
 # 3. calcular métricas y mostrar resultados
 for registro in datos_validos:
