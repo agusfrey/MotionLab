@@ -91,40 +91,41 @@ def cargar_datos(ruta):
     encabezado = archivo.readline()
     if encabezado.strip() == "":
         raise ValueError("El archivo está vacío")
-        for linea in archivo:
-            valores = parsear_linea(linea)
-            id_participante = valores[0]
-            tiempo          = valores[1]
-            x               = valores[2]
-            y               = valores[3]
-            hit             = valores[4]
-            condicion       = valores[5]
+    datos = []
+    for linea in archivo:
+        valores = parsear_linea(linea)
+        id_participante = valores[0]
+        tiempo          = valores[1]
+        x               = valores[2]
+        y               = valores[3]
+        hit             = valores[4]
+        condicion       = valores[5]
 
       
-            registro_existente = None
-            for registro in datos:
-                if registro["id_participante"] == id_participante:
-                    registro_existente = registro
-                    break
+        registro_existente = None
+        for registro in datos:
+            if registro["id_participante"] == id_participante:
+                registro_existente = registro
+                break
 
-            if registro_existente is not None:
+        if registro_existente is not None:
                 # si ye existe, agrega los valores a sus listas
-                registro_existente["tiempo"].append(tiempo)
-                registro_existente["x"].append(x)
-                registro_existente["y"].append(y)
-                registro_existente["hit"].append(hit)
-                registro_existente["condicion"].append(condicion)
-            else:
+            registro_existente["tiempo"].append(tiempo)
+            registro_existente["x"].append(x)
+            registro_existente["y"].append(y)
+            registro_existente["hit"].append(hit)
+            registro_existente["condicion"].append(condicion)
+        else:
             # si no existe, crea un diccionario nuevo
-                nuevo_registro = {
-                    "id_participante": id_participante,
-                    "tiempo":    [tiempo],
-                    "x":         [x],
-                    "y":         [y],
-                    "hit":       [hit],
-                    "condicion": [condicion]
-                }
-                datos.append(nuevo_registro)
+            nuevo_registro = {
+                "id_participante": id_participante,
+                "tiempo":    [tiempo],
+                "x":         [x],
+                "y":         [y],
+                "hit":       [hit],
+                "condicion": [condicion]
+             }
+            datos.append(nuevo_registro)
 
     archivo.close()
     return datos
