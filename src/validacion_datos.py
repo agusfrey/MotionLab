@@ -1,54 +1,33 @@
+
 def validar_registro(registro):
     """
     Verifica que los datos de un participante sean correctos y válidos.
 
-    Comprueba que hit sea True o False, que condicion sea
-    'competencia' o 'cooperacion', y que el tiempo no sea negativo.
+    Comprueba que el tiempo sea creciente, que hit sea True o False,
+    que condicion sea 'competencia' o 'cooperacion', y que el tiempo no sea negativo.
 
     Parámetros:
         registro (dict): diccionario de un participante con sus listas de datos.
 
     Retorna:
-        bool: True si los datos son válidos, False si hay algún error.
+        bool: True si los datos son válidos.
+
+    Lanza:
+        ValueError: si algún valor no cumple con el tipo o rango esperado.
     """
-    try:
-        for i in range(len(registro["tiempo"])):
-            if registro["hit"][i] not in [True, False]:
-                return False
-            if registro["condicion"][i] not in ["competencia", "cooperacion"]:
-                return False
-            if registro["tiempo"][i] < 0:
-                return False
-        return True
-    except:
-        return False
+    if len(registro["tiempo"]) == 0:
+        raise ValueError("El registro no tiene datos para calcular las metricas" )
 
+    for i in range(len(registro["tiempo"])):
+        if registro["hit"][i] not in [True, False]:
+            raise ValueError('hit inválido: debe ser True o False")
+      if registro["condicion"][i] not in ["competencia", "cooperacion"]:
+            raise ValueError("condicion inválida: debe ser competencia o cooperacion")
+        if registro["tiempo"][i] < 0:
+            raise ValueError("tiempo negativo, debe ser mayor a cero ")
 
-def validar_linea(id_p, tiempo, x, y, hit, condicion):
-    
-    try:
-        int(id_p)
-    except:
-        raise ValueError("ID inválido")
-
-    try:
-        float(tiempo)
-    except:
-        raise ValueError("Tiempo inválido")
-
-    try:
-        float(x)
-        float(y)
-    except:
-        raise ValueError("Coordenadas inválidas")
-
-    if hit != True and hit != False:
-        raise ValueError("Hit inválido")
-
-    if condicion == "":
-        raise ValueError("Condición vacía")
-
-    if tiempo < 0:
-        raise ValueError("Tiempo negativo")
+    for i in range(1, len(registro["tiempo"])):
+        if registro["tiempo"][i] <= registro["tiempo"][i - 1]:
+            raise ValueError("tiempo no es creciente")
 
     return True
