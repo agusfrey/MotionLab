@@ -85,7 +85,7 @@ def cargar_datos(ruta):
     """
    try:
         archivo = open(ruta, "r")
-    except FileNotFoundError:
+    except ValueError:
         raise ValueError(f"No se encontró el archivo en la ruta '{ruta}'")
 
     encabezado = archivo.readline()
