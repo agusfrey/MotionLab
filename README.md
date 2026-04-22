@@ -13,11 +13,27 @@ El sistema tiene 4 archivos con 7 funciones en total:
 
 #Errores y Validaciones
 
-- Se validó que el ID sea entero
-- Se valido que el tiempo sea positivo
 - Se valido que (x) e (y) sean números
-- Se utilizo try-except para que salten errores
 - En caso de error, el programa se detiene mostrando el problema
+- Se validó que el ID sea entero y mayor a 0
+- Se validó que el tiempo sea positivo y creciente
+- Se validó que hit sea True o False
+- Se validó que condicion sea competencia o cooperacion
+- Se validó que el archivo exista y no esté vacío.
+- Las funciones detectan errores con raise y el main los maneja con try/except
+- En caso de error , el programa se detiene mostrando el problema
+- En el main, si el ID ingresado no existe, se muestra un mensaje de error y se vuelve a pedir
+
+#  Objetos
+Si el sistema se modelara con objetos, se definirían las siguientes clases:
+
+Clase Participante 
+- Atributos: id_participante, tiempo, x, y, hit, condicion
+- Métodos: calcular_hits_totales(), calcular_tiempo_primer_hit()
+
+Clase MotionLab**
+- Atributos: participantes (lista de objetos Participante)
+- Métodos: cargar_datos(), validar_registro(), filtrar_por_participante()
 
 #USO IA
 Se uso Chatgpt para identificar mejor los errores y no equivocarse acoplando todo.
