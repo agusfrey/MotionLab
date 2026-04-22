@@ -24,6 +24,17 @@ El sistema tiene 4 archivos con 7 funciones en total:
 - En caso de error , el programa se detiene mostrando el problema
 - En el main, si el ID ingresado no existe, se muestra un mensaje de error y se vuelve a pedir
 
+#  Objetos
+Si el sistema se modelara con objetos, se definirían las siguientes clases:
+
+Clase Participante 
+- Atributos: id_participante, tiempo, x, y, hit, condicion
+- Métodos: calcular_hits_totales(), calcular_tiempo_primer_hit()
+
+Clase MotionLab**
+- Atributos: participantes (lista de objetos Participante)
+- Métodos: cargar_datos(), validar_registro(), filtrar_por_participante()
+
 #USO IA
 Se uso Chatgpt para identificar mejor los errores y no equivocarse acoplando todo.
 
