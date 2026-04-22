@@ -19,7 +19,7 @@ El sistema tiene 4 archivos con 7 funciones en total:
 - Se validó que el tiempo sea positivo y creciente
 - Se validó que hit sea True o False
 - Se validó que condicion sea competencia o cooperacion
-- Se validó que el archivo exista y no esté vacío
+- Se validó que el archivo exista y no esté vacío.
 - Las funciones detectan errores con raise y el main los maneja con try/except
 - En caso de error , el programa se detiene mostrando el problema
 - En el main, si el ID ingresado no existe, se muestra un mensaje de error y se vuelve a pedir
