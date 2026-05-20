@@ -35,6 +35,17 @@ Clase MotionLab**
 - Atributos: participantes (lista de objetos Participante)
 - Métodos: cargar_datos(), validar_registro(), filtrar_por_participante()
 
+## Implementación con Pandas
+
+Si se utilizara la librería Pandas para la lectura del dataset, se importaría de la siguiente forma:
+
+import pandas as pd
+df = pd.read_csv("datos/MotionLab_mock_data.csv")
+
+La función que se debería modificar es cargar_datos() en carga_datos.py, ya que actualmente abre y recorre el archivo línea por línea con open(). Con Pandas, el archivo se cargaría directamente en un DataFrame con pd.read_csv(), simplificando la lectura y conversión de tipos de datos.
+
+Además, parsear_linea() podría eliminarse ya que Pandas convierte automáticamente los tipos de datos al leer el archivo.
+
 #USO IA
 Se uso Chatgpt para identificar mejor los errores y no equivocarse acoplando todo.
 
