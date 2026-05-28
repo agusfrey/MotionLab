@@ -1,19 +1,16 @@
-def filtrar_por_participante(datos, id_participante):
-    """
-    Busca y devuelve el registro correspondiente a un participante específico.
 
-    Recorre la lista de registros y retorna el diccionario cuyo
-    id_participante coincida con el valor indicado.
+def filtrar_por_participante(df, id_participante):
+    """
+    Filtra el DataFrame para obtener los datos de un participante específico.
 
     Parámetros:
-        datos (list): lista de diccionarios, uno por participante.
+        df (DataFrame): datos completos de todos los participantes.
         id_participante (int): identificador del participante a buscar.
 
     Retorna:
-        dict: diccionario del participante con sus datos completos.
-        None: si no se encontró ningún participante con ese id.
+        DataFrame: datos del participante, o None si no existe.
     """
-    for registro in datos:
-        if registro["id_participante"] == id_participante:
-            return registro
-    return None  # si no se encontró el participante
+    resultado = df[df["id_participante"] == id_participante]
+    if len(resultado) == 0:
+        return None
+    return resultado
