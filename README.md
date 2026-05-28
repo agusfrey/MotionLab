@@ -46,6 +46,27 @@ La función que se debería modificar es cargar_datos() en carga_datos.py, ya qu
 
 Además, parsear_linea() podría eliminarse ya que Pandas convierte automáticamente los tipos de datos al leer el archivo.
 
+
+## Instrucciones de uso
+1. Clonar el repositorio
+2. Instalar las dependencias
+3. Colocar el archivo CSV en la carpeta `datos/`
+4. Ejecutar el programa: `python main.py`
+5. Ingresar el ID del participante o escribir todos para ver todos
+
+## Estructura del repositorio
+- `src/carga_datos.py` → carga el archivo CSV con Pandas
+- `src/validacion_datos.py` → valida los datos con métodos vectorizados
+- `src/procesamiento_datos.py → filtra los datos por participante
+- `src/metricas.py` → calcula hits totales y tiempo del primer hit
+- `main.py` → ejecuta el flujo completo y genera los gráficos
+- datos/` → carpeta con el archivo CSV
+- `graficos/` → carpeta donde se guardan los gráficos generados automáticamente
+
+## Gráficos generados
+- `graficos/hits_por_condicion.png` → gráfico de barras comparando hits entre competencia y cooperacion
+- `graficos/posicion_x_temporal.png` → gráfico de líneas mostrando la posición X a lo largo del tiempo
+  
 #USO IA
 Se uso Chatgpt para identificar mejor los errores y no equivocarse acoplando todo.
 
