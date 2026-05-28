@@ -1,33 +1,32 @@
 
-def validar_registro(registro):
+def validar_datos(df):
     """
-    Verifica que los datos de un participante sean correctos y válidos.
+    Verifica que el DataFrame tenga datos válidos usando métodos vectorizados de Pandas.
 
-    Comprueba que el tiempo sea creciente, que hit sea True o False,
-    que condicion sea 'competencia' o 'cooperacion', y que el tiempo no sea negativo.
+    Valida tipos, rangos y consistencia de los datos sin usar bucles.
 
     Parámetros:
-        registro (dict): diccionario de un participante con sus listas de datos.
+        df (DataFrame): datos cargados desde el archivo CSV.
 
     Retorna:
-        bool: True si los datos son válidos.
+        bool: True si todos los datos son válidos.
 
     Lanza:
-        ValueError: si algún valor no cumple con el tipo o rango esperado.
+        ValueError: si algún dato no cumple con el tipo o rango esperado.
     """
-    if len(registro["tiempo"]) == 0:
-        raise ValueError("El registro no tiene datos para calcular las metricas" )
+    if (df["id_participante"] <= 0).any():
+        raise ValueError("id_participante debe ser mayor a 0")
 
-    for i in range(len(registro["tiempo"])):
-        if registro["hit"][i] not in [True, False]:
-            raise ValueError('hit inválido: debe ser True o False")
-      if registro["condicion"][i] not in ["competencia", "cooperacion"]:
-            raise ValueError("condicion inválida: debe ser competencia o cooperacion")
-        if registro["tiempo"][i] < 0:
-            raise ValueError("tiempo negativo, debe ser mayor a cero ")
+    if (df["tiempo"] < 0).any():
+        raise ValueError("tiempo no puede ser negativo")
 
-    for i in range(1, len(registro["tiempo"])):
-        if registro["tiempo"][i] <= registro["tiempo"][i - 1]:
-            raise ValueError("tiempo no es creciente")
+    if not df["tiempo"].is_monotonic_increasing:
+        raise ValueError("tiempo no está ordenado de forma creciente")
+
+    if not df["hit"].isin([True, False]).all():
+        raise ValueError("hit debe ser True o False")
+
+    if not df["condicion"].isin(["competencia", "cooperacion"]).all():
+        raise ValueError("condicion debe ser competencia o cooperacion")
 
     return True
