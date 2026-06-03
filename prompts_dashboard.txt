@@ -1,0 +1,42 @@
+Rol: Actuá como experto en diseño de interfaces web con Streamlit y Python.
+
+Objetivo: Construir el archivo app.py para el proyecto MotionLab, 
+que es un sistema de análisis de datos de tarea motora.
+
+Contexto: El proyecto ya tiene los siguientes módulos en src/:
+- carga_datos.py: carga el CSV con pandas
+- validacion_datos.py: valida los datos con métodos vectorizados
+- procesamiento_datos.py: filtra datos por participante
+- metricas.py: calcula hits totales y tiempo del primer hit
+- graficos.py: genera gráficos con matplotlib
+
+El dataset tiene las columnas: id_participante, tiempo, x, y, hit, condicion
+
+Acción: Crear app.py que:
+1. Permita subir el archivo CSV con st.file_uploader
+2. Valide los datos usando validar_datos() y muestre errores con st.error
+3. Muestre KPIs con st.metric (hits totales, participantes, registros)
+4. Muestre los gráficos con st.pyplot
+5. No duplique lógica de src/
+
+Restricciones:
+- Usar funciones existentes de src/
+- No escribir lógica de negocio en app.py
+- Código simple, claro y con comentarios
+
+--- REGISTRO DE ITERACIONES ---
+
+Iteración 1:
+Prompt: "El gráfico no se mostraba correctamente. 
+Usá fig, ax = plt.subplots() y pasá ax al plot() de pandas"
+Corrección: Se reemplazó df.plot() directo por fig, ax = plt.subplots() 
+y se pasó ax=ax como parámetro.
+
+--- REFLEXIÓN TÉCNICA ---
+
+La estrategia que mejor funcionó fue usar el formato ROCA: 
+dar un rol claro, un objetivo concreto, el contexto del proyecto 
+y una acción específica. Especificar las restricciones (no duplicar lógica, 
+usar funciones de src/) evitó que la IA generara código redundante. 
+Pedir cambios pequeños y concretos en cada iteración fue más efectivo 
+que pedir todo de una vez.
