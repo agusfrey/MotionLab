@@ -49,10 +49,12 @@ Además, parsear_linea() podría eliminarse ya que Pandas convierte automáticam
 
 ## Instrucciones de uso
 1. Clonar el repositorio
-2. Instalar las dependencias
+2. Instalar las dependencias: `pip install pandas matplotlib streamlit`
 3. Colocar el archivo CSV en la carpeta `datos/`
-4. Ejecutar el programa: `python main.py`
-5. Ingresar el ID del participante o escribir todos para ver todos
+4. Para ejecutar por consola: `python main.py`
+5. Para ejecutar el dashboard web: `streamlit run app.py`
+6. Ingresar el ID del participante o escribir `todos` para ver todos
+
 
 ## Estructura del repositorio
 - `src/carga_datos.py` → carga el archivo CSV con Pandas
@@ -66,7 +68,19 @@ Además, parsear_linea() podría eliminarse ya que Pandas convierte automáticam
 ## Gráficos generados
 - `graficos/hits_por_condicion.png` → gráfico de barras comparando hits entre competencia y cooperacion
 - `graficos/posicion_x_temporal.png` → gráfico de líneas mostrando la posición X a lo largo del tiempo
-  
+
+## Guía de Ejecución de la Interfaz Web
+
+Para ejecutar el dashboard web, instalar primero las dependencias:
+
+pip install streamlit pandas matplotlib openpyxl
+
+Luego correr el siguiente comando en la terminal:
+
+streamlit run app.py
+
+Esto abrirá automáticamente el navegador con el dashboard. Desde ahí podés subir el archivo CSV y ver los gráficos y métricas.
+
 #USO IA
 Se uso Chatgpt para identificar mejor los errores y no equivocarse acoplando todo.
 
